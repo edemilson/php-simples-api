@@ -58,4 +58,11 @@ class Model {
 
     }
 
+    public function descrever_tabela(){
+
+        $resultado = $this->db->setQuery('SHOW FULL COLUMNS FROM ' . $this->table);
+        return $resultado->result_array();
+
+    }
+
 }

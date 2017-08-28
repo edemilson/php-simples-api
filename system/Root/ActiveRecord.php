@@ -765,6 +765,15 @@ class ActiveRecord
         return $this->lastQuerySql;
     }
 
+    public function setQuery($sql){
+
+        $this->lastQuerySql = $sql;
+        $this->_initSqlArray();
+
+        return $this;
+
+    }
+
     public function simple_query($sql){
 
         $pdo = $this->db->retorna_pdo_instancia();

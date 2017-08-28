@@ -1,6 +1,7 @@
 {
     "require": {
         "phroute/phroute": "^2.1",
-        "bshaffer/oauth2-server-php": "^1.9"
+        "bshaffer/oauth2-server-php": "^1.9",
+        "vlucas/valitron": "^1.4"
     }
 }

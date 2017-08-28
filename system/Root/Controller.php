@@ -3,6 +3,7 @@
 namespace Root;
 use Root\Response;
 use Root\OuathController;
+use Root\Validation;
 
 class Controller {
     
@@ -69,7 +70,7 @@ class Controller {
 
         $data = $this->get_data_request('post');
 
-        $this->response->set_data($this->resource->inserir($data));
+        $this->response->set_data($this->resource->inserir($data['dados']));
         return $this->response->json();
 
     }
@@ -79,7 +80,7 @@ class Controller {
         
         $data = $this->get_data_request('put');
 
-        $this->response->set_data($this->resource->atualizar($id, $data));
+        $this->response->set_data($this->resource->atualizar($id, $data['dados']));
         return $this->response->json();
 
     }
@@ -106,8 +107,20 @@ class Controller {
                 parse_str(file_get_contents('php://input'),  $dados);
                 break;
         }
+        
+        $validacao = new Validation();
+        $validacao->setar_descricao_tabela($this->resource->descrever_tabela());
+        $validacao->setar_dados_recebidos_por_parametros($dados);
+        $data['validacao'] = $validacao->validar_dados();
+        $data['dados'] = $dados;
 
-        return $dados;
+        if($data['validacao']){
+            $this->response->set_data(array('Checar os valores do campos, validação nao atendida', $data['validacao']));
+            echo $this->response->json();
+            die();
+        }
+
+        return $data;
 
     }
 
