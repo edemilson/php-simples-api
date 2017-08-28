@@ -16,7 +16,7 @@ php cli.php -r Pessoa -c varchar:45:nome,varchar:15:cidade,int:3:idade
 
 Esse comando irá criar o controller, o model e caso a tabela não exista no banco de dados será criada. Explicando um pouco melhor o que o comando faz no primeiro paramêtro informamos o nome do resource utilizando o -r nesse exemplo Pessoa e utilizando o -c vamos dizer quais campos teremos que nesse exemplo são NOME VARCHAR(45), CIDADE VARCHAR(15) E IDADE INT(11).
 
-Pronto, feito isso você já pode utilizando sua api e consultar, cadastrar, editar ou deletar pessoas.
+Pronto, feito isso você já pode utilizar sua api e consultar, cadastrar, editar ou deletar pessoas.
 Se estiver trabalhando localhost sua url ficará mais ou menos assim:
 
 ```
@@ -29,7 +29,7 @@ http://localhost/minhaapi/pessoa -> POST (Cria uma nova pessoa, os paramêtros d
 
 ### Validação
 
-Baseado nos tipos dos campos criados uma validação já é aplicada automáticamente.
+Baseado nos tipos dos campos criamos uma validação que já é aplicada automaticamente.
 Você pode adicionar outras validações no campo utilizando os comentários do mysql, basta colocar o tipo da validação e se for mais de uma separe por virgula.
 
 Por exemplo um campo VARCHAR que também é um EMAIL no caso a api irá validar apenas se o conteúdo é VARCHAR, mas se você colocar nos comentários do campo a validação "email" ele passará também a checar esse tipo.
@@ -38,7 +38,7 @@ A lista de validação você encontra aqui: https://github.com/vlucas/valitron
 
 ### Rotas
 
-As rotas da api também são criadas automáticamente, mas caso precise implementar alguma melhoria ou ter mais controle sobre isso você deve consultar a documentação da biblioteca de rotas que utilizamos, aqui: https://github.com/mrjgreen/phroute
+As rotas da api também são criadas automaticamente, mas caso precise implementar alguma melhoria ou ter mais controle sobre isso você deve consultar a documentação da biblioteca de rotas que utilizamos, aqui: https://github.com/mrjgreen/phroute
 
 ### Active Record
 
