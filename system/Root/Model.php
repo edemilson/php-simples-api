@@ -21,13 +21,27 @@ class Model {
 
     }
 
-    public function buscar($id=false){
+    public function buscar($id=false, $relation=false, $many_to_many=false){
 
-        if($id){
-            $this->db->where($this->campo_id, $id);
+        if($relation){
+
+            if($id && !$many_to_many){
+                $this->db->where(strtolower($this->table)."_id", $id);
+            }else if($id && $many_to_many){
+                $this->db->join($relation.'2'.$this->table, $relation."_id = id");
+                $this->db->where(strtolower($this->table)."_id", $id);
+            }
+  
+            $resultado = $this->db->get(strtolower($relation));
+        
+        }else{
+
+            if($id){
+                $this->db->where($this->campo_id, $id);
+            }
+
+            $resultado = $this->db->get($this->table);
         }
-
-        $resultado = $this->db->get($this->table);
 
         return $resultado->result_array();
 

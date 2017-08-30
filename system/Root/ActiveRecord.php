@@ -508,12 +508,16 @@ class ActiveRecord
     {
         if (is_string($table)) {
             $this->sql = "SELECT " . $this->distinct . $this->select . " FROM " . $table;
+
+            if ( ! empty($this->SqlArray['join'])) {
+                $this->sql .= $this->SqlArray['join'];
+            }
+
         }
         
         if (is_null($table) && is_string($this->table)) {
             $this->sql = "SELECT " . $this->distinct . $this->select . " FROM " . $this->table;
-
-            if ( ! empty($this->SqlArray['john'])) {
+            if ( ! empty($this->SqlArray['join'])) {
                 $this->sql .= $this->SqlArray['join'];
             }
         }

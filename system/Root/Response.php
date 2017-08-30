@@ -22,7 +22,7 @@ class Response {
 
         if(!$this->data){
 
-            die("Sem dados de saída");
+            $this->data = array("Sua consulta não retornou registros.");
 
         }
         

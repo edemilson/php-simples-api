@@ -10,6 +10,9 @@ class Controller {
     private $resource;
     private $response;
     public $resource_name = false;
+    protected $relacionamento_uu = false;
+    protected $relacionamento_um = false;
+    protected $relacionamento_mm = false;
 
     public function __construct(){
         
@@ -31,16 +34,37 @@ class Controller {
 
     }
 
-    public function anyIndex($id=false){
-        
+    public function anyIndex($id=false, $relation=false){
+
         $retorno = array();
+        $many_to_many = false;
+
+        if($relation){
+
+            switch ($relation) {
+                case $this->relacionamento_uu:
+                    $relation = $this->relacionamento_uu;
+                    break;
+                case $this->relacionamento_um:
+                    $relation = $this->relacionamento_um;
+                    break;
+                case $this->relacionamento_mm:
+                    $many_to_many = true;
+                    $relation = $this->relacionamento_mm;
+                    break;
+                default:
+                    $relation = false;
+                    break;
+            }
+
+        }
 
         switch (strtolower($_SERVER['REQUEST_METHOD'])) {
             case 'post':
                 $retorno = $this->postSalvar();
                 break;
             case 'get':
-                $retorno = $this->getBuscar($id);
+                $retorno = $this->getBuscar($id, $relation, $many_to_many);
                 break;
             case 'put':
                 $retorno = $this->putAtualizar($id);
@@ -57,10 +81,10 @@ class Controller {
 
     }
 
-    protected function getBuscar($id=false)
+    protected function getBuscar($id=false, $relation=false, $many_to_many=false)
     {   
 
-        $this->response->set_data($this->resource->buscar($id));
+        $this->response->set_data($this->resource->buscar($id, $relation, $many_to_many));
         return $this->response->json();
 
     }
