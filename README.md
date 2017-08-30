@@ -14,6 +14,8 @@ Feito essas configurações inicias podemos começar a criar nossos primeiros re
 php cli.php -r Pessoa -c varchar:45:nome,varchar:15:cidade,int:3:idade
 ```
 
+Esse comando irá criar o controller, o model e caso a tabela não exista no banco de dados será criada. Explicando um pouco melhor o que o comando faz no primeiro paramêtro informamos o nome do resource utilizando o -r nesse exemplo Pessoa e utilizando o -c vamos dizer quais campos teremos que nesse exemplo são NOME VARCHAR(45), CIDADE VARCHAR(15) E IDADE INT(11).
+
 Para utilizar relacionamento entre tabelas utilize um dos paramêtros:
 
 ```
@@ -28,13 +30,11 @@ Exemplo:
 php cli.php -r Endereco -c varchar:45:rua,varchar:15:cidade,int:3:numero -a Pessoa
 ```
 
-Isso irá criar um rota nova para consultar no caso do exemplo os endereços de uma pessoa, ficando algo parecido com isso:
+Isso criará um nova rota para consultar no caso do exemplo os endereços de uma pessoa, ficando algo parecido com isso:
 
 ```
 http://localhost/minhaapi/pessoa/1/endereco -> GET (Busca todos os endereços da pessoa com id 1)
 ```
-
-Esse comando irá criar o controller, o model e caso a tabela não exista no banco de dados será criada. Explicando um pouco melhor o que o comando faz no primeiro paramêtro informamos o nome do resource utilizando o -r nesse exemplo Pessoa e utilizando o -c vamos dizer quais campos teremos que nesse exemplo são NOME VARCHAR(45), CIDADE VARCHAR(15) E IDADE INT(11).
 
 Pronto, feito isso você já pode utilizar sua api e consultar, cadastrar, editar ou deletar pessoas.
 Se estiver trabalhando localhost sua url ficará mais ou menos assim:
